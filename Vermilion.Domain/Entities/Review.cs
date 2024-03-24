@@ -1,4 +1,5 @@
 ﻿using FluentResults;
+using System.ComponentModel.DataAnnotations;
 using Vermilion.Domain.Common;
 using Vermilion.Domain.ValueObjects.Identifiers;
 
@@ -9,6 +10,7 @@ namespace Vermilion.Domain.Entities
         public RestaurantId RestaurantId { get; private set; }
         public UserId UserId { get; private set; }
         public string Comment { get; private set; }
+        //[MinLength(1), MaxLength(5)]
         public int Rating { get; private set; }
 
         public const int MIN_RATING_VALUE = 1;

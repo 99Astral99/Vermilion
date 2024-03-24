@@ -12,7 +12,7 @@ namespace Vermilion.Domain.Entities
         public string? Description { get; private set; }
         public decimal Price { get; private set; }
 
-        private MenuItem(MenuItemId id, CategoryId categoryId, MenuId menuId, string name, string description, decimal price) : base(id)
+        private MenuItem(MenuItemId id, MenuId menuId, CategoryId categoryId, string name, string description, decimal price) : base(id)
         {
             CategoryId = categoryId;
             Name = name;
@@ -21,10 +21,10 @@ namespace Vermilion.Domain.Entities
             MenuId = menuId;
         }
 
-        public static Result<MenuItem> Create(CategoryId categoryId, MenuId menuId, string name, string description, decimal price)
+        public static Result<MenuItem> Create(MenuId menuId, CategoryId categoryId, string name, string description, decimal price)
         {
             var id = MenuItemId.CreateNew();
-            var menuItem = new MenuItem(id, categoryId, menuId, name, description, price);
+            var menuItem = new MenuItem(id, menuId, categoryId, name, description, price);
 
             return Result.Ok(menuItem);
         }

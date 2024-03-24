@@ -7,6 +7,7 @@ namespace Vermilion.Domain.Entities
     public class Cuisine : Entity<CuisineId>
     {
         public string Name { get; private set; }
+
         private Cuisine(CuisineId id, string name) : base(id)
         {
             Name = name;
