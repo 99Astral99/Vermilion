@@ -1,0 +1,19 @@
+﻿using Microsoft.EntityFrameworkCore;
+using Vermilion.Domain.Entities;
+
+namespace Vermilion.Application.Interfaces
+{
+    public interface IVermilionDbContext
+    {
+        public DbSet<Cuisine> Cuisines { get; set; }
+        public DbSet<Feature> Features { get; set; }
+        public DbSet<Category> Categories { get; set; }
+        public DbSet<Menu> Menus { get; set; }
+        public DbSet<MenuItem> MenuItems { get; set; }
+        public DbSet<Restaurant> Restaurants { get; set; }
+        public DbSet<Review> Reviews { get; set; }
+        public DbSet<User> Users { get; set; }
+        public DbSet<WorkSchedule> WorkSchedules { get; set; }
+        Task<int> SaveChangesAsync(CancellationToken cancellationToken);
+    }
+}
