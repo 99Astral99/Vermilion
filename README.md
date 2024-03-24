@@ -4,8 +4,8 @@
 - For easy search of cafes and restaurants in the city of Mariupol 
 - An explicit demonstration of the DDD architecture
   
-Vermilion - project name
-MVP - minumum viable product
+- Vermilion - project name
+- MVP - minumum viable product
 
 # Stack
 - .NET 8 WebApi
