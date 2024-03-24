@@ -1,17 +1,16 @@
-﻿namespace Vermilion.Domain.ValueObjects.Identifiers
+﻿namespace Vermilion.Domain.Common
 {
     public abstract record EntityId
     {
-        protected readonly string Value;
+        protected string Value { get; private set; }
         protected EntityId(string value)
         {
             if (string.IsNullOrEmpty(value))
             {
-                throw new ArgumentException("ID не может быть null");
+                throw new ArgumentException("Id can't be null");
             }
             Value = value;
         }
-
         public override string ToString()
         {
             return Value;

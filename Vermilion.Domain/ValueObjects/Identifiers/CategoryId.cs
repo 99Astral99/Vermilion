@@ -1,6 +1,16 @@
-﻿namespace Vermilion.Domain.ValueObjects.Identifiers
+﻿using Vermilion.Domain.Common;
+
+namespace Vermilion.Domain.ValueObjects.Identifiers
 {
-    public class CategoryId
+    public record CategoryId : EntityId
     {
+        public CategoryId(string value) : base(value)
+        {
+        }
+
+        public static CategoryId CreateNew()
+        {
+            return new CategoryId(Guid.NewGuid().ToString());
+        }
     }
 }

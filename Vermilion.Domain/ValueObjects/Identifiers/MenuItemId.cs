@@ -1,4 +1,6 @@
-﻿namespace Vermilion.Domain.ValueObjects.Identifiers
+﻿using Vermilion.Domain.Common;
+
+namespace Vermilion.Domain.ValueObjects.Identifiers
 {
     public record MenuItemId : EntityId
     {

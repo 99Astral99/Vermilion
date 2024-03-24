@@ -1,6 +1,4 @@
-﻿using Vermilion.Domain.ValueObjects.Identifiers;
-
-namespace Vermilion.Domain.Common
+﻿namespace Vermilion.Domain.Common
 {
     public abstract class Entity<TId> where TId : EntityId
     {
@@ -8,9 +6,10 @@ namespace Vermilion.Domain.Common
 
         protected Entity(TId id)
         {
-            Id = id ?? throw new Exception("Id не может быть пустым");
+            Id = id ?? throw new Exception("Id can't be null");
         }
 
+        protected Entity() { }
         private readonly List<DomainEvent> _domainEvents = new();
         public ICollection<DomainEvent> DomainEvents => _domainEvents;
 
