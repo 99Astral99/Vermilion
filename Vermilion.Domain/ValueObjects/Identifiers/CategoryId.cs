@@ -4,13 +4,13 @@ namespace Vermilion.Domain.ValueObjects.Identifiers
 {
     public record CategoryId : EntityId
     {
-        public CategoryId(string value) : base(value)
+        public CategoryId(Guid value) : base(value)
         {
         }
 
         public static CategoryId CreateNew()
         {
-            return new CategoryId(Guid.NewGuid().ToString());
+            return new CategoryId(Guid.NewGuid());
         }
     }
 }
