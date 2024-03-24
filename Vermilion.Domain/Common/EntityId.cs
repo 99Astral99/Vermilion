@@ -2,10 +2,10 @@
 {
     public abstract record EntityId
     {
-        protected string Value { get; private set; }
-        protected EntityId(string value)
+        public Guid Value { get; private set; }
+        protected EntityId(Guid value)
         {
-            if (string.IsNullOrEmpty(value))
+            if (string.IsNullOrEmpty(value.ToString()))
             {
                 throw new ArgumentException("Id can't be null");
             }
@@ -13,7 +13,7 @@
         }
         public override string ToString()
         {
-            return Value;
+            return Value.ToString();
         }
     }
 }
