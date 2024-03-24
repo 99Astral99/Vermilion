@@ -12,7 +12,7 @@ namespace Vermilion.Infrastructure.Configurations
             builder.HasKey(x => x.Id);
 
             builder.Property(x => x.Id).HasConversion(
-                reviewId => reviewId.ToString(),
+                reviewId => reviewId.Value,
                 value => new ReviewId(value));
 
             builder.Property(p => p.Comment).HasMaxLength(500).IsRequired();

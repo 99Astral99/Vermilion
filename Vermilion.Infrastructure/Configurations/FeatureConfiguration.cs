@@ -12,7 +12,7 @@ namespace Vermilion.Infrastructure.Configurations
             builder.HasKey(x => x.Id);
 
             builder.Property(x => x.Id).HasConversion(
-                featureId => featureId.ToString(),
+                featureId => featureId.Value,
                 value => new FeatureId(value));
 
             builder.Property(n => n.Name).HasMaxLength(100).IsRequired();

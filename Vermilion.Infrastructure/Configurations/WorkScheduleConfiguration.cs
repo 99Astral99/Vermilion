@@ -13,7 +13,7 @@ namespace Vermilion.Infrastructure.Configurations
             builder.HasKey(x => x.Id);
 
             builder.Property(x => x.Id).HasConversion(
-                workScheduleId => workScheduleId.ToString(),
+                workScheduleId => workScheduleId.Value,
                 value => new WorkScheduleId(value));
 
             builder.Property(p => p.DayOfWeek)

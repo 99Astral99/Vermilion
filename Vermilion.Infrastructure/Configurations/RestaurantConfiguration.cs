@@ -12,11 +12,11 @@ namespace Vermilion.Infrastructure.Configurations
             builder.HasKey(x => x.Id);
 
             builder.Property(x => x.Id).HasConversion(
-                restaurantId => restaurantId.ToString(),
+                restaurantId => restaurantId.Value,
                 value => new RestaurantId(value));
 
             builder.Property(p => p.Name).HasMaxLength(100).IsRequired();
-            builder.Property(p => p.Description).HasMaxLength(100);
+            builder.Property(p => p.Description).HasMaxLength(500);
             builder.Property(p => p.Email).HasMaxLength(100);
             builder.Property(p => p.Phone).HasMaxLength(100);
 

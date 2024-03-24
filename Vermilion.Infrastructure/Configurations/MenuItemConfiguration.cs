@@ -12,12 +12,12 @@ namespace Vermilion.Infrastructure.Configurations
             builder.HasKey(x => x.Id);
 
             builder.Property(x => x.Id).HasConversion(
-                menuItemId => menuItemId.ToString(),
+                menuItemId => menuItemId.Value,
                 value => new MenuItemId(value));
 
-            builder.HasOne(x => x.CategoryId)
+            builder.HasOne<Category>()
                 .WithMany()
-                .HasForeignKey(x => x.Id);
+                .HasForeignKey(x => x.CategoryId);
         }
     }
 }

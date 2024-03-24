@@ -12,15 +12,11 @@ namespace Vermilion.Infrastructure.Configurations
             builder.HasKey(x => x.Id);
 
             builder.Property(x => x.Id).HasConversion(
-                userId => userId.ToString(),
+                userId => userId.Value,
                 value => new UserId(value));
 
             builder.HasIndex(e => e.Email).IsUnique();
             builder.Property(p => p.Email).IsRequired();
-
-            builder.Property(x => x.Id).HasConversion(
-                restaurantId => restaurantId.ToString(),
-                value => new UserId(value));
 
             builder.HasMany(r => r.Reviews)
                 .WithOne()

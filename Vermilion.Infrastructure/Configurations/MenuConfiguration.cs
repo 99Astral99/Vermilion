@@ -11,11 +11,12 @@ namespace Vermilion.Infrastructure.Configurations
         {
             builder.HasKey(x => x.Id);
             builder.Property(x => x.Id).HasConversion(
-                menuId => menuId.ToString(),
+                menuId => menuId.Value,
                 value => new MenuId(value));
 
             builder.HasMany(m => m.MenuItems)
                 .WithOne()
+                .HasForeignKey(m => m.MenuId)
                 .OnDelete(DeleteBehavior.Cascade);
 
             builder.Property(n => n.Name).HasMaxLength(100).IsRequired();
