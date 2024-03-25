@@ -2,6 +2,7 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Vermilion.Application.Interfaces;
+using Vermilion.Domain.Repositories;
 
 namespace Vermilion.Infrastructure
 {
@@ -17,9 +18,10 @@ namespace Vermilion.Infrastructure
                 options.UseNpgsql(connectionString);
             });
 
-
             services.AddScoped<IVermilionDbContext>(provider =>
                 provider.GetService<VermilionDbContext>()!);
+
+            services.AddScoped(typeof(IRepository<>), typeof(EfRepository<>));
 
             return services;
         }
