@@ -8,7 +8,7 @@ namespace Vermilion.Infrastructure
 {
     public static class DependencyInjection
     {
-        public static IServiceCollection AddPersistence(this IServiceCollection services,
+        public static IServiceCollection AddInfrastructure(this IServiceCollection services,
             IConfiguration configuration)
         {
             var connectionString = configuration["ConnectionStrings:pg-connection"];
@@ -22,6 +22,7 @@ namespace Vermilion.Infrastructure
                 provider.GetService<VermilionDbContext>()!);
 
             services.AddScoped(typeof(IRepository<>), typeof(EfRepository<>));
+            services.AddScoped(typeof(IRepositoryReadOnly<>), typeof(EfRepository<>));
 
             return services;
         }
