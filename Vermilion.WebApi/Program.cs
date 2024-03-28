@@ -1,3 +1,5 @@
+using Vermilion.Application;
+using Vermilion.Contracts;
 using Vermilion.Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -9,9 +11,9 @@ services.AddControllers();
 services.AddEndpointsApiExplorer();
 services.AddSwaggerGen();
 
-services.AddPersistence(configuration);
-
-
+services.AddContracts();
+services.AddApplication();
+services.AddInfrastructure(configuration);
 
 var app = builder.Build();
 
@@ -28,7 +30,7 @@ using (var scope = app.Services.CreateScope())
         throw;
     }
 }
-// Configure the HTTP request pipeline.
+
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();

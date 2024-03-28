@@ -16,11 +16,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Vermilion.Application\Vermilion.Application.csproj" />
+    <ProjectReference Include="..\Vermilion.Contracts\Vermilion.Contracts.csproj" />
     <ProjectReference Include="..\Vermilion.Infrastructure\Vermilion.Infrastructure.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Controllers\" />
   </ItemGroup>
 
 </Project>
