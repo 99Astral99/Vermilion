@@ -2,7 +2,7 @@
 {
     public abstract record EntityId
     {
-        public Guid Value { get; private set; }
+        public Guid Value { get; set; }
         protected EntityId(Guid value)
         {
             if (string.IsNullOrEmpty(value.ToString()))
