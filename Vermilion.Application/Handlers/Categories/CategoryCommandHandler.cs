@@ -7,7 +7,6 @@ using Vermilion.Contracts.Categories.Commands.UpdateCategory;
 using Vermilion.Contracts.Responses;
 using Vermilion.Domain.Entities;
 using Vermilion.Domain.Repositories;
-using Vermilion.Domain.ValueObjects.Identifiers;
 
 namespace Vermilion.Application.Handlers.Categories
 {
@@ -38,10 +37,10 @@ namespace Vermilion.Application.Handlers.Categories
             var existCategory = await _categoryRepository.GetByIdAsync(request.Id, cancellationToken);
             Guard.Against.NotFound(request.Id.ToString(), existCategory, nameof(existCategory.Id));
 
-            var categoryToUpdate = _mapper.Map<Category>(request);
-            await _categoryRepository.UpdateAsync(categoryToUpdate);
+            existCategory.SetName(request.Name);
+            await _categoryRepository.UpdateAsync(existCategory);
 
-            var updatedCategory = await _categoryRepository.GetByIdAsync(categoryToUpdate.Id, cancellationToken);
+            var updatedCategory = await _categoryRepository.GetByIdAsync(existCategory.Id, cancellationToken);
             return _mapper.Map<ResponseCategory>(updatedCategory);
         }
 
