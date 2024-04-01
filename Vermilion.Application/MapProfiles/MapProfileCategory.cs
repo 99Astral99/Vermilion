@@ -10,7 +10,6 @@ namespace Vermilion.Application.MapProfiles
         public MapProfileCategory()
         {
             CreateMap<Category, ResponseCategory>();
-            CreateMap<UpdateCategoryCommand, Category>();
         }
     }
 }
