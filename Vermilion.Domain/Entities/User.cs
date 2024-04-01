@@ -27,7 +27,7 @@ namespace Vermilion.Domain.Entities
 
         public static Result<User> Create(string firstName, string lastName, string email, string phone)
         {
-            var id = UserId.CreateNew();
+            var id = new UserId(Guid.NewGuid());
             var user = new User(id, firstName, lastName, email, phone);
 
             return Result.Ok(user);

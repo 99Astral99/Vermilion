@@ -12,7 +12,7 @@ namespace Vermilion.Domain.Entities
 
         public static Feature Create(string Name)
         {
-            var id = FeatureId.CreateNew();
+            var id = new FeatureId(Guid.NewGuid());
             var feature = new Feature(id, Name);
 
             return feature;

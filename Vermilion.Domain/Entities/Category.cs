@@ -11,11 +11,16 @@ namespace Vermilion.Domain.Entities
             Name = name;
         }
 
+        private Category() { }
         public string Name { get; private set; }
 
+        public void SetName(string name)
+        {
+            Name = name;
+        }
         public static Result<Category> Create(string name)
         {
-            var id = CategoryId.CreateNew();
+            var id = new CategoryId(Guid.NewGuid());
             var category = new Category(id, name);
 
             return Result.Ok(category);

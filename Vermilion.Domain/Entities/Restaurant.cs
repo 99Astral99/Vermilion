@@ -51,7 +51,7 @@ namespace Vermilion.Domain.Entities
 
         public static Result<Restaurant> Create(string name, string? description, string phone, string? email, string? websiteUrl, Address address)
         {
-            var id = RestaurantId.CreateNew();
+            var id = new RestaurantId(Guid.NewGuid());
             var restaurant = new Restaurant(id, name, description, phone, email, websiteUrl, address);
 
             return Result.Ok(restaurant);

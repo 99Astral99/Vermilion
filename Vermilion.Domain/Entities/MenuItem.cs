@@ -23,7 +23,7 @@ namespace Vermilion.Domain.Entities
 
         public static Result<MenuItem> Create(MenuId menuId, CategoryId categoryId, string name, string description, decimal price)
         {
-            var id = MenuItemId.CreateNew();
+            var id = new MenuItemId(Guid.NewGuid());
             var menuItem = new MenuItem(id, menuId, categoryId, name, description, price);
 
             return Result.Ok(menuItem);

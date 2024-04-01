@@ -1,6 +1,6 @@
 ﻿namespace Vermilion.Domain.Common
 {
-    public abstract class Entity<TId> where TId : EntityId
+    public abstract class Entity<TId> where TId : class
     {
         public TId Id { get; }
 

@@ -23,7 +23,7 @@ namespace Vermilion.Domain.Entities
             if (string.IsNullOrWhiteSpace(name))
                 return Result.Fail("Name can't be empty");
 
-            var id = MenuId.CreateNew();
+            var id = new MenuId(Guid.NewGuid());
             var menu = new Menu(id, name, restaurantId);
 
             return Result.Ok(menu);

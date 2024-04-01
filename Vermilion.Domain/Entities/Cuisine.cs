@@ -18,7 +18,7 @@ namespace Vermilion.Domain.Entities
             if (string.IsNullOrWhiteSpace(name))
                 return Result.Fail("Name can't be empty");
 
-            var id = CuisineId.CreateNew();
+            var id = new CuisineId(Guid.NewGuid());
             var category = new Cuisine(id, name);
 
             return category;

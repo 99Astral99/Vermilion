@@ -1,16 +1,4 @@
-﻿using Vermilion.Domain.Common;
-
-namespace Vermilion.Domain.ValueObjects.Identifiers
+﻿namespace Vermilion.Domain.ValueObjects.Identifiers
 {
-    public record ReviewId : EntityId
-    {
-        public ReviewId(Guid value) : base(value)
-        {
-        }
-
-        public static ReviewId CreateNew()
-        {
-            return new ReviewId(Guid.NewGuid());
-        }
-    }
+    public record ReviewId(Guid Value);
 }

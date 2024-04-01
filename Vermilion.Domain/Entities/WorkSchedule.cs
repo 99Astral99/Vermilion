@@ -23,7 +23,7 @@ namespace Vermilion.Domain.Entities
 
         public static Result<WorkSchedule> Create(DayOfWeek dayOfWeek, TimeSpan startTime, TimeSpan endTime, bool isDayOff, RestaurantId restaurantId)
         {
-            var id = WorkScheduleId.CreateNew();
+            var id = new WorkScheduleId(Guid.NewGuid());
             var workSchedule = new WorkSchedule(id, dayOfWeek, startTime, endTime, isDayOff, restaurantId);
             return Result.Ok(workSchedule);
         }
