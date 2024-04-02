@@ -16,7 +16,7 @@ namespace Vermilion.WebApi.Controllers
         {
             var category = await Mediator.Send(new GetCategoryQuery(Id), cancellationToken);
 
-            return Ok(category);
+            return Ok(category.Value);
         }
 
         [HttpGet]
@@ -25,7 +25,7 @@ namespace Vermilion.WebApi.Controllers
             var query = new GetAllCategoriesQuery();
             var categories = await Mediator.Send(query);
 
-            return Ok(categories);
+            return Ok(categories.Value);
         }
 
         [HttpPost]
@@ -33,14 +33,14 @@ namespace Vermilion.WebApi.Controllers
         {
             var category = await Mediator.Send(command, cancellationToken);
 
-            return Created(nameof(Create), category);
+            return Created(nameof(Create), category.Value);
         }
 
         [HttpPost]
         public async Task<ActionResult> Update(UpdateCategoryCommand command, CancellationToken cancellation = default)
         {
             var updatedCategory = await Mediator.Send(command, cancellation);
-            return Ok(updatedCategory);
+            return Ok(updatedCategory.Value);
         }
 
         [HttpPost]
