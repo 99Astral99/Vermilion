@@ -1,3 +1,5 @@
+using MediatR;
+using Serilog;
 using Vermilion.Application;
 using Vermilion.Contracts;
 using Vermilion.Infrastructure;
@@ -6,6 +8,10 @@ var builder = WebApplication.CreateBuilder(args);
 var services = builder.Services;
 var configuration = builder.Configuration;
 
+builder.Host.UseSerilog((context, config) =>
+{
+    config.ReadFrom.Configuration(context.Configuration);
+});
 
 services.AddControllers();
 services.AddEndpointsApiExplorer();
@@ -41,6 +47,8 @@ if (app.Environment.IsDevelopment())
         c.DisplayRequestDuration();
     });
 }
+
+app.UseSerilogRequestLogging();
 
 app.UseHttpsRedirection();
 
