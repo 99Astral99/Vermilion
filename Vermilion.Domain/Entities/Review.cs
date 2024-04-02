@@ -1,5 +1,4 @@
 ﻿using FluentResults;
-using System.ComponentModel.DataAnnotations;
 using Vermilion.Domain.Common;
 using Vermilion.Domain.ValueObjects.Identifiers;
 
@@ -31,7 +30,7 @@ namespace Vermilion.Domain.Entities
 
             if (rating < MIN_RATING_VALUE || rating > MAX_RATING_VALUE)
                 return Result.Fail($"Rating value must be between {MIN_RATING_VALUE} and {MAX_RATING_VALUE}");
-            var id = ReviewId.CreateNew();
+            var id = new ReviewId(Guid.NewGuid());
             var review = new Review(id, restaurantId, userId, comment, rating);
 
             return Result.Ok(review);

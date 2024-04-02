@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using Vermilion.Contracts.Categories.Commands.UpdateCategory;
 using Vermilion.Contracts.Responses;
 using Vermilion.Domain.Entities;
 
