@@ -59,10 +59,10 @@
 - Menu pagination ❌
 
 ## Menu Item Category
-- Create (mvp) ❌
-- Get (mvp)❌
-- Update ❌
-- Delete ❌
+- Create (mvp) ✔️
+- Get (mvp)✔️
+- Update ✔️
+- Delete ✔️
 
 ## Restaurant Cuisine 
 - Create (mvp) ❌
