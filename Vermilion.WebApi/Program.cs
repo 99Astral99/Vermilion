@@ -23,6 +23,11 @@ services.AddInfrastructure(configuration);
 
 services.AddRouting(options => options.LowercaseUrls = true);
 services.AddResponseCompression();
+
+services.AddScoped(typeof(IPipelineBehavior<,>),
+    typeof(LoggingPipelineBehavior<,>));
+
+
 var app = builder.Build();
 
 using (var scope = app.Services.CreateScope())
