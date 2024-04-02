@@ -15,6 +15,8 @@ services.AddContracts();
 services.AddApplication();
 services.AddInfrastructure(configuration);
 
+services.AddRouting(options => options.LowercaseUrls = true);
+services.AddResponseCompression();
 var app = builder.Build();
 
 using (var scope = app.Services.CreateScope())
@@ -34,7 +36,10 @@ using (var scope = app.Services.CreateScope())
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
-    app.UseSwaggerUI();
+    app.UseSwaggerUI(c =>
+    {
+        c.DisplayRequestDuration();
+    });
 }
 
 app.UseHttpsRedirection();
