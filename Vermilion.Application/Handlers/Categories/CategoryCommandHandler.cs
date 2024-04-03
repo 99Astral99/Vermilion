@@ -1,7 +1,7 @@
-﻿using Ardalis.GuardClauses;
-using AutoMapper;
+﻿using AutoMapper;
 using FluentResults;
 using MediatR;
+using Vermilion.Application.Common.Exceptions;
 using Vermilion.Contracts.Categories.Commands.CreateCategory;
 using Vermilion.Contracts.Categories.Commands.DeleteCategory;
 using Vermilion.Contracts.Categories.Commands.UpdateCategory;
@@ -37,7 +37,7 @@ namespace Vermilion.Application.Handlers.Categories
         {
             var existCategory = await _categoryRepository.GetByIdAsync(request.Id, cancellationToken);
             if (existCategory is null)
-                return Result.Fail($"CategoryNotFoundException. Category with ID: {request.Id} wasn't found");
+                return Result.Fail(new ExceptionalError($"\"{nameof(Category)}\" with ID: {request.Id.Value} was not found", new NotFoundException()));
 
             existCategory.SetName(request.Name);
             await _categoryRepository.UpdateAsync(existCategory);
@@ -49,7 +49,8 @@ namespace Vermilion.Application.Handlers.Categories
         public async Task<Result> Handle(DeleteCategoryCommand request, CancellationToken cancellationToken)
         {
             var existCategory = await _categoryRepository.GetByIdAsync(request.Id, cancellationToken);
-            Guard.Against.NotFound(request.Id.ToString(), existCategory, nameof(existCategory.Id));
+            if (existCategory is null)
+                return Result.Fail(new ExceptionalError($"\"{nameof(Category)}\" with ID: {request.Id.Value} was not found", new NotFoundException()));
 
             await _categoryRepository.DeleteAsync(existCategory, cancellationToken);
 

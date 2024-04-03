@@ -1,7 +1,7 @@
-﻿using Ardalis.GuardClauses;
-using AutoMapper;
+﻿using AutoMapper;
 using FluentResults;
 using MediatR;
+using Vermilion.Application.Common.Exceptions;
 using Vermilion.Contracts.Categories.Queries.GetAll;
 using Vermilion.Contracts.Categories.Queries.GetCategory;
 using Vermilion.Contracts.Responses;
@@ -26,9 +26,8 @@ namespace Vermilion.Application.Handlers.Categories
         public async Task<Result<ResponseCategory>> Handle(GetCategoryQuery request, CancellationToken cancellationToken)
         {
             var existCategory = await _categoryRepository.GetByIdAsync(request.Id, cancellationToken);
-
             if (existCategory is null)
-                return Result.Fail($"Category with ID: {request.Id} wasn't found");
+                return Result.Fail(new ExceptionalError($"\"{nameof(Category)}\" with ID: {request.Id.Value} was not found", new NotFoundException()));
 
             return Result.Ok(_mapper.Map<ResponseCategory>(existCategory));
         }
