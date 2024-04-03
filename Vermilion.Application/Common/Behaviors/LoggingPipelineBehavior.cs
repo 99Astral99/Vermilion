@@ -2,7 +2,7 @@
 using MediatR;
 using Microsoft.Extensions.Logging;
 
-namespace Vermilion.Application.Behaviors
+namespace Vermilion.Application.Common.Behaviors
 {
     public class LoggingPipelineBehavior<TRequest, TResponse>
         : IPipelineBehavior<TRequest, TResponse>

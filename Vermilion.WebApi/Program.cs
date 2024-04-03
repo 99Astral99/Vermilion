@@ -1,7 +1,7 @@
 using MediatR;
 using Serilog;
 using Vermilion.Application;
-using Vermilion.Application.Behaviors;
+using Vermilion.Application.Common.Behaviors;
 using Vermilion.Contracts;
 using Vermilion.Infrastructure;
 

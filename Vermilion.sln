@@ -15,13 +15,15 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{2D4C8CA7
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentation", "Presentation", "{E71B4748-8BB2-4619-A4CD-936433332200}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vermilion.Infrastructure", "Vermilion.Infrastructure\Vermilion.Infrastructure.csproj", "{481695BA-5DD8-499A-AC43-F6F963E72DFE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vermilion.Infrastructure", "Vermilion.Infrastructure\Vermilion.Infrastructure.csproj", "{481695BA-5DD8-499A-AC43-F6F963E72DFE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vermilion.Application", "Vermilion.Application\Vermilion.Application.csproj", "{16A3B69F-FABA-4532-BCDC-D5DBA49B7DBB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vermilion.Application", "Vermilion.Application\Vermilion.Application.csproj", "{16A3B69F-FABA-4532-BCDC-D5DBA49B7DBB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vermilion.WebApi", "Vermilion.WebApi\Vermilion.WebApi.csproj", "{18AE49FD-09BF-45B7-9129-225D85E5ABAB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vermilion.WebApi", "Vermilion.WebApi\Vermilion.WebApi.csproj", "{18AE49FD-09BF-45B7-9129-225D85E5ABAB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vermilion.Contracts", "Vermilion.Contracts\Vermilion.Contracts.csproj", "{90240A0A-F796-48DF-8910-DBC9432912B6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vermilion.Contracts", "Vermilion.Contracts\Vermilion.Contracts.csproj", "{90240A0A-F796-48DF-8910-DBC9432912B6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vermilion.ApplicationTests", "Vermilion.ApplicationTests\Vermilion.ApplicationTests.csproj", "{A66B177C-5053-427D-857A-02D269E3F508}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -49,6 +51,10 @@ Global
 		{90240A0A-F796-48DF-8910-DBC9432912B6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{90240A0A-F796-48DF-8910-DBC9432912B6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{90240A0A-F796-48DF-8910-DBC9432912B6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A66B177C-5053-427D-857A-02D269E3F508}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A66B177C-5053-427D-857A-02D269E3F508}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A66B177C-5053-427D-857A-02D269E3F508}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A66B177C-5053-427D-857A-02D269E3F508}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -63,6 +69,7 @@ Global
 		{16A3B69F-FABA-4532-BCDC-D5DBA49B7DBB} = {9DC0D9BB-8785-4BC6-8B9E-038FC89ACCB4}
 		{18AE49FD-09BF-45B7-9129-225D85E5ABAB} = {E71B4748-8BB2-4619-A4CD-936433332200}
 		{90240A0A-F796-48DF-8910-DBC9432912B6} = {9DC0D9BB-8785-4BC6-8B9E-038FC89ACCB4}
+		{A66B177C-5053-427D-857A-02D269E3F508} = {2D4C8CA7-6EC9-4657-954E-6557F064810D}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {D3208F81-48A6-48D7-8112-50563C8EE41E}

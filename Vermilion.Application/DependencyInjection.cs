@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
-using Vermilion.Application.MapProfiles;
+using Vermilion.Application.Common.MapProfiles;
 
 namespace Vermilion.Application
 {

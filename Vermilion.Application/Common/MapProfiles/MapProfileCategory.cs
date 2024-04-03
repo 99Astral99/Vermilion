@@ -2,7 +2,7 @@
 using Vermilion.Contracts.Responses;
 using Vermilion.Domain.Entities;
 
-namespace Vermilion.Application.MapProfiles
+namespace Vermilion.Application.Common.MapProfiles
 {
     public class MapProfileCategory : Profile
     {
