@@ -11,7 +11,12 @@ namespace Vermilion.Domain.Entities
         private Cuisine(CuisineId id, string name) : base(id)
         {
             Name = name;
+            //CateringId = cateringId;
         }
+
+        //public CateringId CateringId { get; private set; }
+
+        private Cuisine() { }
 
         public static Result<Cuisine> Create(string name)
         {
@@ -23,6 +28,7 @@ namespace Vermilion.Domain.Entities
 
             return category;
         }
+
 
         public void UpdateName(string newName)
         {
