@@ -8,7 +8,7 @@ namespace Vermilion.Application.Common.MapProfiles
     {
         public MapProfileCategory()
         {
-            CreateMap<Category, ResponseCategory>();
+            //CreateMap<Category, ResponseCategory>();
         }
     }
 }

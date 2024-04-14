@@ -1,6 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
-using Vermilion.Application.Common.MapProfiles;
 
 namespace Vermilion.Application
 {
@@ -9,11 +8,11 @@ namespace Vermilion.Application
         public static IServiceCollection AddApplication(this IServiceCollection services)
         {
             services.AddMediatR(cfg =>
-            cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()));
+                cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()));
 
             services.AddAutoMapper(cfg =>
             {
-                cfg.AddProfile(typeof(MapProfileCategory));
+                cfg.AddMaps(Assembly.GetExecutingAssembly());
             });
 
             return services;
