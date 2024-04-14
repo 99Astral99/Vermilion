@@ -20,6 +20,8 @@ namespace Vermilion.Infrastructure.Configurations
                 .HasConversion<DayOfWeekConverter>()
                 .IsRequired();
 
+            builder.HasIndex(x => x.DayOfWeek).IsUnique();
+
             builder.Property(p => p.StartTime).IsRequired();
             builder.Property(p => p.EndTime).IsRequired();
 

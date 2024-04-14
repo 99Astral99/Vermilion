@@ -16,6 +16,8 @@ namespace Vermilion.Infrastructure.Configurations
                 value => new CuisineId(value));
 
             builder.Property(p => p.Name).HasMaxLength(100).IsRequired();
+
+            builder.HasData(Cuisine.Create("Type1").Value);
         }
     }
 }

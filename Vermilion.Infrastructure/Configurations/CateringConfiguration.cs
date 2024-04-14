@@ -5,25 +5,27 @@ using Vermilion.Domain.ValueObjects.Identifiers;
 
 namespace Vermilion.Infrastructure.Configurations
 {
-    public class RestaurantConfiguration : IEntityTypeConfiguration<Restaurant>
+    public class CateringConfiguration : IEntityTypeConfiguration<Catering>
     {
-        public void Configure(EntityTypeBuilder<Restaurant> builder)
+        public void Configure(EntityTypeBuilder<Catering> builder)
         {
             builder.HasKey(x => x.Id);
 
             builder.Property(x => x.Id).HasConversion(
                 restaurantId => restaurantId.Value,
-                value => new RestaurantId(value));
+                value => new CateringId(value));
 
             builder.Property(p => p.Name).HasMaxLength(100).IsRequired();
             builder.Property(p => p.Description).HasMaxLength(500);
-            builder.Property(p => p.Email).HasMaxLength(100);
-            builder.Property(p => p.Phone).HasMaxLength(100);
 
-            builder.HasMany(m => m.Menus)
-                .WithOne()
-                .HasForeignKey(x => x.RestaurantId)
-                .OnDelete(DeleteBehavior.Cascade);
+            builder.ComplexProperty(x => x.ContactInfo, x =>
+            {
+                x.Property(x => x.PhoneNumber).HasMaxLength(100).HasColumnName("Phone");
+                x.Property(x => x.Email).HasMaxLength(100).HasColumnName("Email");
+                x.Property(x => x.WebSiteUrl).HasMaxLength(100).HasColumnName("WebSiteUrl");
+            });
+
+            builder.Property(x => x.Address).HasMaxLength(500);
 
             builder.HasMany(r => r.Reviews)
                 .WithOne()
@@ -32,16 +34,14 @@ namespace Vermilion.Infrastructure.Configurations
 
             builder.HasMany(w => w.WorkSchedules)
                 .WithOne()
-                .HasForeignKey(w => w.RestaurantId)
+                .HasForeignKey(w => w.CateringId)
                 .OnDelete(DeleteBehavior.Cascade);
 
-            builder.HasMany(c => c.Cuisines)
+            builder.HasMany(x => x.Cuisines)
                 .WithMany();
 
-            builder.HasMany(f => f.Features)
+            builder.HasMany(x => x.Features)
                 .WithMany();
-
-            builder.ComplexProperty(x => x.Address).IsRequired();
         }
     }
 }
