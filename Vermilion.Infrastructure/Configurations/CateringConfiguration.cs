@@ -30,8 +30,6 @@ namespace Vermilion.Infrastructure.Configurations
                 x.Property(x => x.WebSiteUrl).HasMaxLength(100).HasColumnName("WebSiteUrl");
             });
 
-            builder.Property(x => x.Address).HasMaxLength(500);
-
             builder.HasMany(r => r.Reviews)
                 .WithOne()
                 .HasForeignKey(r => r.CateringId)

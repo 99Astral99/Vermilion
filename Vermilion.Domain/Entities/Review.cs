@@ -7,7 +7,7 @@ namespace Vermilion.Domain.Entities
 {
     public class Review : Entity<ReviewId>, IAuditable
     {
-        public CateringId RestaurantId { get; private set; }
+        public CateringId CateringId { get; private set; }
         public UserId UserId { get; private set; }
         public string? UserName { get; private set; }
         public string Comment { get; private set; }
@@ -19,9 +19,9 @@ namespace Vermilion.Domain.Entities
         public const int MIN_RATING_VALUE = 1;
         public const int MAX_RATING_VALUE = 5;
 
-        private Review(ReviewId id, CateringId restaurantId, UserId userId, string userName, string comment, int rating) : base(id)
+        private Review(ReviewId id, CateringId cateringId, UserId userId, string userName, string comment, int rating) : base(id)
         {
-            RestaurantId = restaurantId;
+            CateringId = cateringId;
             UserId = userId;
             Comment = comment;
             Rating = rating;
