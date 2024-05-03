@@ -13,6 +13,7 @@
 - MediatR + CQRS
 - Serilog
 - PostgreSQL
+- MinIO
 - Docker
 - Redis
 - RabbitMQ + MassTransit
@@ -35,15 +36,15 @@
 - Update ❌
 - Delete ❌
 - Add Review ❌
-- Create Restaurant(not sure) ❌
+- Create Restaurant❌
 - Upload Restaurant image ❌
 
-## Restaurant
-- Create (mvp) ❌
-- Get (mvp)❌
-- Update ❌
-- Delete ❌
-- Restaurant pagination ❌
+## Catering
+- Create (mvp) ✔️
+- Get (mvp)✔️
+- Update ✔️
+- Delete ✔️
+- Restaurant pagination ✔️
 
 ## Menu
 - Create (mvp) ❌
@@ -51,34 +52,21 @@
 - Update ❌
 - Delete ❌
 
-## Menu Item
-- Create (mvp) ❌
-- Get (mvp)❌
-- Update ❌
-- Delete ❌
-- Menu pagination ❌
-
-## Menu Item Category
+## Catering Cuisine 
 - Create (mvp) ✔️
-- Get (mvp)✔️
-- Update ✔️
-- Delete ✔️
-
-## Restaurant Cuisine 
-- Create (mvp) ❌
 - Get (mvp)❌
 - Update ❌
 - Delete ❌
 - Filter by cuisines ❌
 
-## Restaurant Feature
-- Create (mvp) ❌
+## Catering Feature
+- Create (mvp) ✔️
 - Get (mvp)❌
 - Update ❌
 - Delete ❌
 - Filter by features ❌
 
-## Restaurant opening hours (Work Schedule)
+## Catering opening hours (Work Schedule)
 - Create (mvp) ❌
 - Get (mvp)❌
 - Update ❌
