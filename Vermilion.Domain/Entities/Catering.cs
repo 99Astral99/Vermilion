@@ -27,7 +27,6 @@ namespace Vermilion.Domain.Entities
         public IReadOnlyList<Cuisine>? Cuisines => _cuisines?.ToList();
         private readonly List<Cuisine> _cuisines = new();
 
-        public double AverageRating => _reviews.Average(x => x.Rating);
         public IReadOnlyList<Review>? Reviews => _reviews?.ToList();
         private readonly List<Review> _reviews = new();
 
@@ -56,30 +55,29 @@ namespace Vermilion.Domain.Entities
             Address = address ?? Address;
         }
 
-        //public void AddFeature(Feature feature) => _features.Add(feature);
+        public void UpdateAverageRating(double value)
+        {
+            AverageRating = value;
+        }
+        public void AddFeature(Feature feature) => _features.Add(feature);
 
-        //public void RemoveFeature(string featureName)
-        //{
-        //    if (string.IsNullOrEmpty(featureName))
-        //        return;
+        public void RemoveFeature(string featureName)
+        {
+            if (string.IsNullOrEmpty(featureName))
+                return;
 
-        //    var feature = _features.Find(x => x.Name == featureName);
-        //    _features.Remove(feature);
-        //}
+            var feature = _features.Find(x => x.Name == featureName);
+            _features.Remove(feature);
+        }
 
         public void AddCuisine(Cuisine cuisine) => _cuisines.Add(cuisine);
 
-        //public void RemoveCuisine(string cuisineName)
-        //{
-        //    if (string.IsNullOrEmpty(cuisineName))
-        //        return;
-        //    var cuisine = _cuisines.Find(x => x.Name == cuisineName);
-        //    _cuisines.Remove(cuisine);
-        //}
-
-        //public void AddWorkSchedule(WorkSchedule workSchedule)
-        //{
-        //    _workSchedules.Add(workSchedule);
-        //}
+        public void RemoveCuisine(string cuisineName)
+        {
+            if (string.IsNullOrEmpty(cuisineName))
+                return;
+            var cuisine = _cuisines.Find(x => x.Name == cuisineName);
+            _cuisines.Remove(cuisine);
+        }
     }
 }
