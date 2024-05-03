@@ -11,6 +11,7 @@ namespace Vermilion.Domain.Entities
         public string Name { get; private set; }
         public string? Description { get; private set; }
         public string Address { get; private set; }
+        public double AverageRating { get; private set; } = 0;
         public ContactInfo ContactInfo { get; private set; }
 
         private Catering(CateringId id, string name, string? description, ContactInfo contact, string address) : base(id)
