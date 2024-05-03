@@ -11,6 +11,7 @@ namespace Vermilion.Domain.Specifications.SpecsCatering
             Query.Where(x => x.Id == Id)
                 .Include(x => x.Features)
                 .Include(x => x.Cuisines)
+                .Include(x => x.WorkSchedules)
                 .Include(x => x.Reviews);
         }
     }
