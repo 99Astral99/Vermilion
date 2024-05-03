@@ -11,12 +11,16 @@ namespace Vermilion.Infrastructure.Configurations
         {
             builder.HasKey(x => x.Id);
 
+            builder.HasIndex(x => x.Name).IsUnique();
+            builder.HasIndex(x => x.Address).IsUnique();
+
             builder.Property(x => x.Id).HasConversion(
                 restaurantId => restaurantId.Value,
                 value => new CateringId(value));
 
             builder.Property(p => p.Name).HasMaxLength(100).IsRequired();
             builder.Property(p => p.Description).HasMaxLength(500);
+            builder.Property(x => x.Address).HasMaxLength(500);
             builder.Property(p => p.AverageRating).HasDefaultValue(0);
 
             builder.ComplexProperty(x => x.ContactInfo, x =>
@@ -30,7 +34,7 @@ namespace Vermilion.Infrastructure.Configurations
 
             builder.HasMany(r => r.Reviews)
                 .WithOne()
-                .HasForeignKey(r => r.RestaurantId)
+                .HasForeignKey(r => r.CateringId)
                 .OnDelete(DeleteBehavior.Cascade);
 
             builder.HasMany(w => w.WorkSchedules)
