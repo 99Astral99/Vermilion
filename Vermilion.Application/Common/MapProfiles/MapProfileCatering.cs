@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using FluentResults;
 using Vermilion.Contracts.Responses.Caterings;
 using Vermilion.Domain.Entities;
 
