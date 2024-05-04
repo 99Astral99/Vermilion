@@ -13,6 +13,8 @@ namespace Vermilion.Domain.Entities
             Name = name;
         }
 
+        private Cuisine() { }
+
         public static Result<Cuisine> Create(string name)
         {
             if (string.IsNullOrWhiteSpace(name))

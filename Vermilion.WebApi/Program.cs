@@ -1,7 +1,7 @@
 using MediatR;
 using Serilog;
 using Vermilion.Application;
-using Vermilion.Application.Behaviors;
+using Vermilion.Application.Common.Behaviors;
 using Vermilion.Contracts;
 using Vermilion.Infrastructure;
 
@@ -24,6 +24,9 @@ services.AddInfrastructure(configuration);
 
 services.AddRouting(options => options.LowercaseUrls = true);
 services.AddResponseCompression();
+
+services.AddStackExchangeRedisCache(opt =>
+opt.Configuration = builder.Configuration.GetConnectionString("redis"));
 
 services.AddScoped(typeof(IPipelineBehavior<,>),
     typeof(LoggingPipelineBehavior<,>));

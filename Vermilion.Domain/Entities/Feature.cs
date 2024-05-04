@@ -1,4 +1,5 @@
-﻿using Vermilion.Domain.Common;
+﻿using FluentResults;
+using Vermilion.Domain.Common;
 using Vermilion.Domain.ValueObjects.Identifiers;
 
 namespace Vermilion.Domain.Entities
@@ -10,13 +11,16 @@ namespace Vermilion.Domain.Entities
             Name = name;
         }
 
-        public static Feature Create(string Name)
+        private Feature() { }
+
+        public string Name { get; private set; }
+
+        public static Result<Feature> Create(string Name)
         {
             var id = new FeatureId(Guid.NewGuid());
             var feature = new Feature(id, Name);
 
-            return feature;
+            return Result.Ok(feature);
         }
-        public string Name { get; private set; }
     }
 }

@@ -16,4 +16,9 @@
     <ProjectReference Include="..\Vermilion.Domain\Vermilion.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="WorkSchedules\Commands\UpdateSchedule\" />
+    <Folder Include="WorkSchedules\Queries\" />
+  </ItemGroup>
+
 </Project>
