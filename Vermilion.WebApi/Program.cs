@@ -25,6 +25,9 @@ services.AddInfrastructure(configuration);
 services.AddRouting(options => options.LowercaseUrls = true);
 services.AddResponseCompression();
 
+services.AddStackExchangeRedisCache(opt =>
+opt.Configuration = builder.Configuration.GetConnectionString("redis"));
+
 services.AddScoped(typeof(IPipelineBehavior<,>),
     typeof(LoggingPipelineBehavior<,>));
 

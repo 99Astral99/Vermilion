@@ -2,6 +2,8 @@
 using AutoMapper;
 using FluentResults;
 using MediatR;
+using Microsoft.Extensions.Caching.Distributed;
+using Vermilion.Application.Common.CachingExtensions;
 using Vermilion.Application.Common.Exceptions;
 using Vermilion.Contracts.Caterings.Queries.GetAll;
 using Vermilion.Contracts.Caterings.Queries.GetCateringDetails;
@@ -21,18 +23,26 @@ namespace Vermilion.Application.Handlers.Caterings
         private readonly IRepositoryReadOnly<Catering> _cateringRepository;
         private readonly IRepositoryReadOnly<Review> _reviewRepository;
         private readonly IMapper _mapper;
+        private readonly IDistributedCache _cache;
         const int PAGE_SIZE = 10;
 
-        public CateringQueryHandler(IRepositoryReadOnly<Catering> cateringRepository, IMapper mapper, IRepositoryReadOnly<Review> reviewRepository)
+        public CateringQueryHandler(IRepositoryReadOnly<Catering> cateringRepository, IMapper mapper, IRepositoryReadOnly<Review> reviewRepository, IDistributedCache cache)
         {
             _cateringRepository = cateringRepository;
             _mapper = mapper;
             _reviewRepository = reviewRepository;
+            _cache = cache;
         }
 
         public async Task<Result<ResponseCateringInfo>> Handle(GetCateringDetailsQuery request, CancellationToken cancellationToken)
         {
-            var existCatering = await _cateringRepository.GetBySpecAsync(new CateringByIdSpec(request.Id), cancellationToken);
+            var existCatering = await _cache.GetAsync($"catering-{request.Id}", async token =>
+            {
+                var existCatering = await _cateringRepository.GetBySpecAsync(new CateringByIdSpec(request.Id), cancellationToken);
+                return existCatering;
+
+            }, CacheOptions.DefaultExpiration, cancellationToken);
+
             if (existCatering is null)
                 return Result.Fail(new ExceptionalError($"\"{nameof(Catering)}\" with ID: {request.Id.Value} was not found", new NotFoundException()));
 
