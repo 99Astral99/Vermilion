@@ -23,7 +23,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vermilion.WebApi", "Vermili
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vermilion.Contracts", "Vermilion.Contracts\Vermilion.Contracts.csproj", "{90240A0A-F796-48DF-8910-DBC9432912B6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vermilion.ApplicationTests", "Vermilion.ApplicationTests\Vermilion.ApplicationTests.csproj", "{A66B177C-5053-427D-857A-02D269E3F508}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vermilion.ApplicationTests", "Vermilion.ApplicationTests\Vermilion.ApplicationTests.csproj", "{A66B177C-5053-427D-857A-02D269E3F508}"
+EndProject
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{E40474DD-DD17-4436-80EC-09CD536645E6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -55,6 +57,10 @@ Global
 		{A66B177C-5053-427D-857A-02D269E3F508}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A66B177C-5053-427D-857A-02D269E3F508}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A66B177C-5053-427D-857A-02D269E3F508}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E40474DD-DD17-4436-80EC-09CD536645E6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E40474DD-DD17-4436-80EC-09CD536645E6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E40474DD-DD17-4436-80EC-09CD536645E6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E40474DD-DD17-4436-80EC-09CD536645E6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
