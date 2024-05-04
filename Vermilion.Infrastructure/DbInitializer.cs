@@ -1,4 +1,6 @@
-﻿namespace Vermilion.Infrastructure
+﻿using Microsoft.EntityFrameworkCore;
+
+namespace Vermilion.Infrastructure
 {
     public class DbInitializer
     {
@@ -6,7 +8,7 @@
         {
             //context.Database.EnsureDeleted();
             //context.Database.EnsureCreated();
-            //context.Database.Migrate();
+            context.Database.Migrate();
         }
     }
 }
