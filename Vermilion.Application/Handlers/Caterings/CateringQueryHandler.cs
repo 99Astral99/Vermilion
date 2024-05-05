@@ -36,7 +36,7 @@ namespace Vermilion.Application.Handlers.Caterings
 
         public async Task<Result<ResponseCateringInfo>> Handle(GetCateringDetailsQuery request, CancellationToken cancellationToken)
         {
-            var existCatering = await _cache.GetAsync($"catering-{request.Id}", async token =>
+            var existCatering = await _cache.GetAsync($"caterings-{request.Id}", async token =>
             {
                 var existCatering = await _cateringRepository.GetBySpecAsync(new CateringByIdSpec(request.Id), cancellationToken);
                 return existCatering;
