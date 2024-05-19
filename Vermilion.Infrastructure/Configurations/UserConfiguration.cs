@@ -18,6 +18,16 @@ namespace Vermilion.Infrastructure.Configurations
             builder.HasIndex(e => e.Email).IsUnique();
             builder.Property(p => p.Email).IsRequired();
 
+            builder.HasIndex(p => p.Phone).IsUnique();
+            builder.Property(p => p.Phone).IsRequired();
+
+            builder.ComplexProperty(x => x.FullName, x =>
+            {
+                x.Property(x => x.FirstName).HasColumnName("FirstName");
+                x.Property(x => x.LastName).HasColumnName("LastName");
+                x.Property(x => x.MiddleName).HasColumnName("MiddleName");
+            });
+
             builder.HasMany(r => r.Reviews)
                 .WithOne()
                 .HasForeignKey(u => u.UserId)

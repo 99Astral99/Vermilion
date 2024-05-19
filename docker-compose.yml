@@ -36,9 +36,20 @@ services:
      container_name: vermilion-cache
      restart: always
      ports:
-        - 6379:6379
+      - 6379:6379
      networks:
       - backend
+  
+  vermilion-mq:
+     image: rabbitmq:latest
+     container_name: vermilion-mq
+     hostname: vermilion-queue
+     volumes:
+      - ./.containers/queue/data/:/var/lib/rabbitmq
+      - ./.containers/queue/data/:/var/log/rabbitmq
+     environment:
+      RABBITMQ_DEFAULT_USER: guest
+      RABBITMQ_DEFAULT_PASS: guest
 
 volumes:
   postgres-data: {}
