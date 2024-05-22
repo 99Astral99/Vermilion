@@ -5,6 +5,7 @@ namespace Vermilion.Application.Interfaces
 {
     public interface IVermilionDbContext
     {
+        public DbSet<CateringImage> CateringImages { get; set; }
         public DbSet<Cuisine> Cuisines { get; set; }
         public DbSet<Feature> Features { get; set; }
         public DbSet<Catering> Caterings { get; set; }

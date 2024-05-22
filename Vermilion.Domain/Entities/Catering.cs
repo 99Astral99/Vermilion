@@ -39,6 +39,9 @@ namespace Vermilion.Domain.Entities
         public IReadOnlyList<WorkSchedule>? WorkSchedules => _workSchedules?.ToList();
         private readonly List<WorkSchedule> _workSchedules = new();
 
+        public IReadOnlyList<CateringImage>? CateringImage => _cateringImages?.ToList();
+        private readonly List<CateringImage> _cateringImages = new();
+
         public DateTime CreatedAt { get; private set; }
         public DateTime UpdatedAt { get; private set; }
 
