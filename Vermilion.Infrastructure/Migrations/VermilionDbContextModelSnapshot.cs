@@ -172,7 +172,7 @@ namespace Vermilion.Infrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("8f5a98d5-4ec8-46df-b112-28b964802e0c"),
+                            Id = new Guid("eed56d78-0b7e-4e70-9cc8-a2089fa508a4"),
                             Name = "Type1"
                         });
                 });
@@ -190,13 +190,6 @@ namespace Vermilion.Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Features");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = new Guid("6dbae7d8-a56f-4456-b380-23806f014cc2"),
-                            Name = "Type1"
-                        });
                 });
 
             modelBuilder.Entity("Vermilion.Domain.Entities.Review", b =>
@@ -248,36 +241,42 @@ namespace Vermilion.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<string>("FirstName")
-                        .HasColumnType("text");
-
-                    b.Property<string>("LastName")
-                        .HasColumnType("text");
-
                     b.Property<string>("Phone")
+                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<DateTime>("UpdatedAt")
                         .HasColumnType("timestamp with time zone");
+
+                    b.ComplexProperty<Dictionary<string, object>>("FullName", "Vermilion.Domain.Entities.User.FullName#FullName", b1 =>
+                        {
+                            b1.IsRequired();
+
+                            b1.Property<string>("FirstName")
+                                .IsRequired()
+                                .HasColumnType("text")
+                                .HasColumnName("FirstName");
+
+                            b1.Property<string>("LastName")
+                                .IsRequired()
+                                .HasColumnType("text")
+                                .HasColumnName("LastName");
+
+                            b1.Property<string>("MiddleName")
+                                .IsRequired()
+                                .HasColumnType("text")
+                                .HasColumnName("MiddleName");
+                        });
 
                     b.HasKey("Id");
 
                     b.HasIndex("Email")
                         .IsUnique();
 
-                    b.ToTable("Users");
+                    b.HasIndex("Phone")
+                        .IsUnique();
 
-                    b.HasData(
-                        new
-                        {
-                            Id = new Guid("51886939-d863-4454-a05a-a8fb556d0bf4"),
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Email = "email.com",
-                            FirstName = "alex",
-                            LastName = "the terrible",
-                            Phone = "79797",
-                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        });
+                    b.ToTable("Users");
                 });
 
             modelBuilder.Entity("Vermilion.Domain.Entities.WorkSchedule", b =>
