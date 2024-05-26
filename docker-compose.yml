@@ -41,11 +41,11 @@ services:
       - backend
   
   vermilion-mq:
-     image: rabbitmq:3.11.7-management
+     image: rabbitmq:3.13.2-management
      container_name: vermilion-mq
      hostname: vermilion-queue
      volumes:
-        - ./.containers/queue/data/:/var/lib/rabbitmq/
+        - ./.containers/queue/data/:/var/lib/rabbitmq/mnesia
         - ./.containers/queue/log/:/var/log/rabbitmq   
      ports:
       - "5672:5672"
