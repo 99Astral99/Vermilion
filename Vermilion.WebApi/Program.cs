@@ -14,10 +14,10 @@ var builder = WebApplication.CreateBuilder(args);
 var services = builder.Services;
 var configuration = builder.Configuration;
 
-builder.Host.UseSerilog((context, config) =>
-{
-    config.ReadFrom.Configuration(context.Configuration);
-});
+//builder.Host.UseSerilog((context, config) =>
+//{
+//    config.ReadFrom.Configuration(context.Configuration);
+//});
 
 services.AddControllers();
 services.AddEndpointsApiExplorer();
@@ -93,7 +93,7 @@ if (app.Environment.IsDevelopment())
     });
 }
 
-app.UseSerilogRequestLogging();
+//app.UseSerilogRequestLogging();
 
 app.UseHttpsRedirection();
 

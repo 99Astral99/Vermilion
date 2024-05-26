@@ -24,6 +24,7 @@ namespace Vermilion.Infrastructure
             builder.ApplyConfigurationsFromAssembly(typeof(VermilionDbContext).Assembly);
         }
 
+        public DbSet<CateringImage> CateringImages { get; set; }
         public DbSet<Cuisine> Cuisines { get; set; }
         public DbSet<Feature> Features { get; set; }
         public DbSet<Catering> Caterings { get; set; }

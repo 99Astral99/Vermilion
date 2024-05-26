@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using Vermilion.Infrastructure;
@@ -12,9 +13,11 @@ using Vermilion.Infrastructure;
 namespace Vermilion.Infrastructure.Migrations
 {
     [DbContext(typeof(VermilionDbContext))]
-    partial class VermilionDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240522194737_CateringImage")]
+    partial class CateringImage
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -206,7 +209,7 @@ namespace Vermilion.Infrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("eed56d78-0b7e-4e70-9cc8-a2089fa508a4"),
+                            Id = new Guid("dc2b11c7-466c-4df2-a0cc-7d59a7e945c9"),
                             Name = "Type1"
                         });
                 });
@@ -275,39 +278,21 @@ namespace Vermilion.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
+                    b.Property<string>("FirstName")
+                        .HasColumnType("text");
+
+                    b.Property<string>("LastName")
+                        .HasColumnType("text");
+
                     b.Property<string>("Phone")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<DateTime>("UpdatedAt")
                         .HasColumnType("timestamp with time zone");
 
-                    b.ComplexProperty<Dictionary<string, object>>("FullName", "Vermilion.Domain.Entities.User.FullName#FullName", b1 =>
-                        {
-                            b1.IsRequired();
-
-                            b1.Property<string>("FirstName")
-                                .IsRequired()
-                                .HasColumnType("text")
-                                .HasColumnName("FirstName");
-
-                            b1.Property<string>("LastName")
-                                .IsRequired()
-                                .HasColumnType("text")
-                                .HasColumnName("LastName");
-
-                            b1.Property<string>("MiddleName")
-                                .IsRequired()
-                                .HasColumnType("text")
-                                .HasColumnName("MiddleName");
-                        });
-
                     b.HasKey("Id");
 
                     b.HasIndex("Email")
-                        .IsUnique();
-
-                    b.HasIndex("Phone")
                         .IsUnique();
 
                     b.ToTable("Users");
