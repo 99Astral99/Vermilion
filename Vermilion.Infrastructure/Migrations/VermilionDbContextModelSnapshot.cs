@@ -206,7 +206,7 @@ namespace Vermilion.Infrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("dc2b11c7-466c-4df2-a0cc-7d59a7e945c9"),
+                            Id = new Guid("eed56d78-0b7e-4e70-9cc8-a2089fa508a4"),
                             Name = "Type1"
                         });
                 });
@@ -275,21 +275,39 @@ namespace Vermilion.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<string>("FirstName")
-                        .HasColumnType("text");
-
-                    b.Property<string>("LastName")
-                        .HasColumnType("text");
-
                     b.Property<string>("Phone")
+                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<DateTime>("UpdatedAt")
                         .HasColumnType("timestamp with time zone");
 
+                    b.ComplexProperty<Dictionary<string, object>>("FullName", "Vermilion.Domain.Entities.User.FullName#FullName", b1 =>
+                        {
+                            b1.IsRequired();
+
+                            b1.Property<string>("FirstName")
+                                .IsRequired()
+                                .HasColumnType("text")
+                                .HasColumnName("FirstName");
+
+                            b1.Property<string>("LastName")
+                                .IsRequired()
+                                .HasColumnType("text")
+                                .HasColumnName("LastName");
+
+                            b1.Property<string>("MiddleName")
+                                .IsRequired()
+                                .HasColumnType("text")
+                                .HasColumnName("MiddleName");
+                        });
+
                     b.HasKey("Id");
 
                     b.HasIndex("Email")
+                        .IsUnique();
+
+                    b.HasIndex("Phone")
                         .IsUnique();
 
                     b.ToTable("Users");

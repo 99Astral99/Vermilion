@@ -12,5 +12,6 @@ namespace Vermilion.Application.Interfaces
         public DbSet<Review> Reviews { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<WorkSchedule> WorkSchedules { get; set; }
+        Task<int> SaveChangesAsync(CancellationToken cancellationToken);
     }
 }

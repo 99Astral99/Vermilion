@@ -7,7 +7,7 @@ using Vermilion.Contracts.Caterings.Commands.AddCuisine;
 using Vermilion.Contracts.Caterings.Commands.AddFeature;
 using Vermilion.Contracts.Caterings.Commands.CreateCatering;
 using Vermilion.Contracts.Caterings.Commands.DeleteCatering;
-using Vermilion.Contracts.Caterings.Commands.UpdateCateringCommand;
+using Vermilion.Contracts.Caterings.Commands.UpdateCatering;
 using Vermilion.Contracts.Responses.Caterings;
 using Vermilion.Domain.Entities;
 using Vermilion.Domain.Repositories;

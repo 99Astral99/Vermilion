@@ -1,9 +1,14 @@
+using MassTransit;
 using MediatR;
+using Microsoft.Extensions.Options;
 using Serilog;
 using Vermilion.Application;
+using Vermilion.Application.Common.Abstractions.EventBus;
 using Vermilion.Application.Common.Behaviors;
+using Vermilion.Application.Handlers.Reviews;
 using Vermilion.Contracts;
 using Vermilion.Infrastructure;
+using Vermilion.Infrastructure.MessageBroker;
 
 var builder = WebApplication.CreateBuilder(args);
 var services = builder.Services;
@@ -24,6 +29,37 @@ services.AddInfrastructure(configuration);
 
 services.AddRouting(options => options.LowercaseUrls = true);
 services.AddResponseCompression();
+
+
+services.Configure<MessageBrokerSettings>(
+    configuration.GetSection("MessageBroker"));
+
+services.AddSingleton(sp => sp.GetRequiredService<IOptions<MessageBrokerSettings>>().Value);
+
+services.AddMassTransit(busConfigurator =>
+{
+    busConfigurator.SetKebabCaseEndpointNameFormatter();
+
+    busConfigurator.AddConsumer<ReviewCreatedEventConsumer>();
+
+    busConfigurator.UsingRabbitMq((context, configurator) =>
+    {
+        MessageBrokerSettings settings = context.GetRequiredService<MessageBrokerSettings>();
+
+        configurator.Host(new Uri(settings.Host), h =>
+        {
+            h.Username(settings.Username);
+            h.Password(settings.Password);
+        });
+
+        configurator.ReceiveEndpoint("ReviewCreatedEventQueue", e =>
+        {
+            e.ConfigureConsumer<ReviewCreatedEventConsumer>(context);
+        });
+    });
+});
+
+builder.Services.AddTransient<IEventBus, EventBus>();
 
 services.AddStackExchangeRedisCache(opt =>
 opt.Configuration = builder.Configuration.GetConnectionString("redis"));
