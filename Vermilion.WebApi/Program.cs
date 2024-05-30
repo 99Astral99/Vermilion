@@ -27,6 +27,11 @@ services.AddContracts();
 services.AddApplication();
 services.AddInfrastructure(configuration);
 
+services.Configure<JwtOptions>(configuration.GetSection(nameof(JwtOptions)));
+services.AddScoped<IPasswordHasher, PasswordHasher>();
+services.AddScoped<IJwtProvider, JwtProvider>();
+services.AddApiAuthentication(configuration);
+
 services.AddRouting(options => options.LowercaseUrls = true);
 services.AddResponseCompression();
 
@@ -97,6 +102,14 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+app.UseCookiePolicy(new CookiePolicyOptions
+{
+    MinimumSameSitePolicy = SameSiteMode.Strict,
+    HttpOnly = HttpOnlyPolicy.Always,
+    Secure = CookieSecurePolicy.Always
+});
+
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
