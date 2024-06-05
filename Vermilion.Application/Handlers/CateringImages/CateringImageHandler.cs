@@ -44,8 +44,6 @@ namespace Vermilion.Application.Handlers.CateringImages
 
         public async Task<Result<PutObjectResponse>> Handle(UploadCateringImageCommand request, CancellationToken cancellationToken)
         {
-            // TO DO
-            // проверка существует ли бакет
             var args = new PutObjectArgs()
                 .WithBucket(_bucketName)
                 .WithObject(request.Name)

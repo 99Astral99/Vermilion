@@ -1,13 +1,18 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Vermilion.Contracts.Responses.Users;
 using Vermilion.Contracts.Users.Commands.AddReview;
+using Vermilion.Contracts.Users.Commands.DeleteReview;
 using Vermilion.Contracts.Users.Commands.LoginUser;
 using Vermilion.Contracts.Users.Commands.RegisterUser;
 
 namespace Vermilion.WebApi.Controllers
 {
+    /// <summary>
+    /// Контроллер для работы с пользователями
+    /// </summary>
     public class UserController : BaseController
     {
+        /// <summary> Регистрация </summary>
         [HttpPost]
         public async Task<IResult> Register([FromBody] RegisterUserRequest request)
         {
@@ -18,6 +23,7 @@ namespace Vermilion.WebApi.Controllers
             return Results.Ok();
         }
 
+        /// <summary> Логин </summary>
         [HttpPost]
         public async Task<IResult> Login([FromBody] LoginUserRequest request)
         {
@@ -30,12 +36,20 @@ namespace Vermilion.WebApi.Controllers
             return Results.Ok();
         }
 
+        /// <summary> Добавить отзыв </summary>
         [HttpPost]
         public async Task<ActionResult> AddReview(AddReviewCommand command)
         {
             var res = await Mediator.Send(command);
 
             return Created(nameof(AddReview), res.Value);
+        }
+
+        [HttpDelete]
+        public async Task<ActionResult> DeleteReview(DeleteReviewCommand command)
+        {
+            await Mediator.Send(command);
+            return NoContent();
         }
     }
 }

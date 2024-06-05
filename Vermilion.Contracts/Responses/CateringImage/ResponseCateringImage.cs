@@ -1,4 +1,4 @@
-﻿using Vermilion.Domain.ValueObjects;
+﻿using Vermilion.Domain.ValueObjects.Identifiers;
 
 namespace Vermilion.Contracts.Responses.CateringImage
 {

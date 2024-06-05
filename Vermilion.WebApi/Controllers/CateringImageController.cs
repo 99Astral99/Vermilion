@@ -2,11 +2,13 @@
 using Vermilion.Contracts.CateringImages.Commands.DeleteCateringImage;
 using Vermilion.Contracts.CateringImages.Commands.UploadCateringImage;
 using Vermilion.Contracts.CateringImages.Queries.GetCateringImage;
-using Vermilion.Domain.ValueObjects;
 using Vermilion.Domain.ValueObjects.Identifiers;
 
 namespace Vermilion.WebApi.Controllers
 {
+    /// <summary>
+    /// Контроллер для работы с изображениями
+    /// </summary>
     public class CateringImageController : BaseController
     {
         [HttpGet]

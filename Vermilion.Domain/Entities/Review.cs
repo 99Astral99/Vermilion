@@ -49,12 +49,12 @@ namespace Vermilion.Domain.Entities
 
         public void UpdateComment(string newComment)
         {
-            //i'll make it later
+            Comment = newComment;
         }
 
         public void UpdateRating(int rating)
         {
-            //i'll make it later
+            Rating = rating;
         }
     }
 }

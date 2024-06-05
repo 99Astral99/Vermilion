@@ -4,6 +4,9 @@ using Vermilion.Contracts.Responses.Features;
 
 namespace Vermilion.WebApi.Controllers
 {
+    /// <summary>
+    /// Контроллер по работе с услугами
+    /// </summary>
     public class FeatureController : BaseController
     {
         [HttpPost]

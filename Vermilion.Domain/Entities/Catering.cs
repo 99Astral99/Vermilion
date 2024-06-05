@@ -13,8 +13,8 @@ namespace Vermilion.Domain.Entities
         public string? Description { get; private set; }
         public ContactInfo ContactInfo { get; private set; }
         public string Address { get; private set; }
+        public bool IsApproved { get; private set; } = false;
         public double AverageRating { get; private set; } = 0;
-
 
         [JsonConstructor]
         private Catering(CateringId id, string name, string? description, ContactInfo contactInfo, string address) : base(id)

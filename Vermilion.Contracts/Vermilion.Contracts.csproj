@@ -13,7 +13,12 @@
     <PackageReference Include="Minio" Version="6.0.2" />
   </ItemGroup>
 
-  <ItemGroup>
+	<PropertyGroup>
+		<GenerateDocumentationFile>true</GenerateDocumentationFile>
+	</PropertyGroup>
+
+
+	<ItemGroup>
     <ProjectReference Include="..\Vermilion.Domain\Vermilion.Domain.csproj" />
   </ItemGroup>
 

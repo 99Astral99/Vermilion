@@ -1,7 +1,7 @@
 ﻿using FluentResults;
 using MediatR;
 using Vermilion.Contracts.Responses.CateringImage;
-using Vermilion.Domain.ValueObjects;
+using Vermilion.Domain.ValueObjects.Identifiers;
 
 namespace Vermilion.Contracts.CateringImages.Queries.GetCateringImage
 {

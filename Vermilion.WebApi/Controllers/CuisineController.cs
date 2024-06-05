@@ -4,6 +4,9 @@ using Vermilion.Contracts.Responses.Cuisines;
 
 namespace Vermilion.WebApi.Controllers
 {
+    /// <summary>
+    /// Контроллер по работе с типом кухни
+    /// </summary>
     public class CuisineController : BaseController
     {
         //[HttpGet]

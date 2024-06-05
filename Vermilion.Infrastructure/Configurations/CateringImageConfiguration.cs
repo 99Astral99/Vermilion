@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Vermilion.Domain.Entities;
-using Vermilion.Domain.ValueObjects;
+using Vermilion.Domain.ValueObjects.Identifiers;
 
 namespace Vermilion.Infrastructure.Configurations
 {

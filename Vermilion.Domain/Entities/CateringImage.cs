@@ -1,7 +1,6 @@
 ﻿using FluentResults;
 using Vermilion.Domain.Common;
 using Vermilion.Domain.Interfaces;
-using Vermilion.Domain.ValueObjects;
 using Vermilion.Domain.ValueObjects.Identifiers;
 
 namespace Vermilion.Domain.Entities

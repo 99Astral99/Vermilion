@@ -1,5 +1,9 @@
 ﻿namespace Vermilion.Domain.Common
 {
+    /// <summary>
+    /// Базовый класс сущности
+    /// </summary>
+    /// <typeparam name="TId"></typeparam>
     public abstract class Entity<TId> where TId : class
     {
         public TId Id { get; }
