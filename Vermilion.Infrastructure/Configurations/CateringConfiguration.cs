@@ -40,6 +40,11 @@ namespace Vermilion.Infrastructure.Configurations
                 .HasForeignKey(w => w.CateringId)
                 .OnDelete(DeleteBehavior.Cascade);
 
+            builder.HasMany(c => c.CateringImage)
+                .WithOne()
+                .HasForeignKey(c => c.CateringId)
+                .OnDelete(DeleteBehavior.Cascade);
+
             builder.HasMany(x => x.Cuisines)
                 .WithMany();
 

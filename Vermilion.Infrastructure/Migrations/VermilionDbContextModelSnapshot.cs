@@ -62,6 +62,9 @@ namespace Vermilion.Infrastructure.Migrations
                     b.Property<Guid?>("CateringId")
                         .HasColumnType("uuid");
 
+                    b.Property<Guid?>("CateringImageId")
+                        .HasColumnType("uuid");
+
                     b.Property<Guid?>("CuisineId")
                         .HasColumnType("uuid");
 
@@ -80,6 +83,8 @@ namespace Vermilion.Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("CateringId");
+
+                    b.HasIndex("CateringImageId");
 
                     b.HasIndex("CuisineId");
 
@@ -115,6 +120,9 @@ namespace Vermilion.Infrastructure.Migrations
                     b.Property<string>("Description")
                         .HasMaxLength(500)
                         .HasColumnType("character varying(500)");
+
+                    b.Property<bool>("IsApproved")
+                        .HasColumnType("boolean");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -155,6 +163,35 @@ namespace Vermilion.Infrastructure.Migrations
                     b.ToTable("Caterings");
                 });
 
+            modelBuilder.Entity("Vermilion.Domain.Entities.CateringImage", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid>("CateringId")
+                        .HasColumnType("uuid");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("character varying(200)");
+
+                    b.Property<long>("Size")
+                        .HasColumnType("bigint");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CateringId");
+
+                    b.ToTable("CateringImages");
+                });
+
             modelBuilder.Entity("Vermilion.Domain.Entities.Cuisine", b =>
                 {
                     b.Property<Guid>("Id")
@@ -172,7 +209,7 @@ namespace Vermilion.Infrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("8f5a98d5-4ec8-46df-b112-28b964802e0c"),
+                            Id = new Guid("77a8fa02-9aea-4100-bdde-45fde8738145"),
                             Name = "Type1"
                         });
                 });
@@ -190,13 +227,6 @@ namespace Vermilion.Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Features");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = new Guid("6dbae7d8-a56f-4456-b380-23806f014cc2"),
-                            Name = "Type1"
-                        });
                 });
 
             modelBuilder.Entity("Vermilion.Domain.Entities.Review", b =>
@@ -248,17 +278,40 @@ namespace Vermilion.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<string>("FirstName")
-                        .HasColumnType("text");
-
-                    b.Property<string>("LastName")
+                    b.Property<string>("PasswordHash")
+                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<string>("Phone")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Role")
+                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<DateTime>("UpdatedAt")
                         .HasColumnType("timestamp with time zone");
+
+                    b.ComplexProperty<Dictionary<string, object>>("FullName", "Vermilion.Domain.Entities.User.FullName#FullName", b1 =>
+                        {
+                            b1.IsRequired();
+
+                            b1.Property<string>("FirstName")
+                                .IsRequired()
+                                .HasColumnType("text")
+                                .HasColumnName("FirstName");
+
+                            b1.Property<string>("LastName")
+                                .IsRequired()
+                                .HasColumnType("text")
+                                .HasColumnName("LastName");
+
+                            b1.Property<string>("MiddleName")
+                                .IsRequired()
+                                .HasColumnType("text")
+                                .HasColumnName("MiddleName");
+                        });
 
                     b.HasKey("Id");
 
@@ -266,18 +319,6 @@ namespace Vermilion.Infrastructure.Migrations
                         .IsUnique();
 
                     b.ToTable("Users");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = new Guid("51886939-d863-4454-a05a-a8fb556d0bf4"),
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Email = "email.com",
-                            FirstName = "alex",
-                            LastName = "the terrible",
-                            Phone = "79797",
-                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        });
                 });
 
             modelBuilder.Entity("Vermilion.Domain.Entities.WorkSchedule", b =>
@@ -347,6 +388,10 @@ namespace Vermilion.Infrastructure.Migrations
                         .WithMany("DomainEvents")
                         .HasForeignKey("CateringId");
 
+                    b.HasOne("Vermilion.Domain.Entities.CateringImage", null)
+                        .WithMany("DomainEvents")
+                        .HasForeignKey("CateringImageId");
+
                     b.HasOne("Vermilion.Domain.Entities.Cuisine", null)
                         .WithMany("DomainEvents")
                         .HasForeignKey("CuisineId");
@@ -366,6 +411,15 @@ namespace Vermilion.Infrastructure.Migrations
                     b.HasOne("Vermilion.Domain.Entities.WorkSchedule", null)
                         .WithMany("DomainEvents")
                         .HasForeignKey("WorkScheduleId");
+                });
+
+            modelBuilder.Entity("Vermilion.Domain.Entities.CateringImage", b =>
+                {
+                    b.HasOne("Vermilion.Domain.Entities.Catering", null)
+                        .WithMany("CateringImage")
+                        .HasForeignKey("CateringId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Vermilion.Domain.Entities.Review", b =>
@@ -394,11 +448,18 @@ namespace Vermilion.Infrastructure.Migrations
 
             modelBuilder.Entity("Vermilion.Domain.Entities.Catering", b =>
                 {
+                    b.Navigation("CateringImage");
+
                     b.Navigation("DomainEvents");
 
                     b.Navigation("Reviews");
 
                     b.Navigation("WorkSchedules");
+                });
+
+            modelBuilder.Entity("Vermilion.Domain.Entities.CateringImage", b =>
+                {
+                    b.Navigation("DomainEvents");
                 });
 
             modelBuilder.Entity("Vermilion.Domain.Entities.Cuisine", b =>

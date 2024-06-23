@@ -10,9 +10,15 @@
     <PackageReference Include="MediatR" Version="12.2.0" />
     <PackageReference Include="MediatR.Contracts" Version="2.0.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.3" />
+    <PackageReference Include="Minio" Version="6.0.2" />
   </ItemGroup>
 
-  <ItemGroup>
+	<PropertyGroup>
+		<GenerateDocumentationFile>true</GenerateDocumentationFile>
+	</PropertyGroup>
+
+
+	<ItemGroup>
     <ProjectReference Include="..\Vermilion.Domain\Vermilion.Domain.csproj" />
   </ItemGroup>
 

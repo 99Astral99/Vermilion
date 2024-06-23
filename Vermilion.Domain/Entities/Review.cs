@@ -1,5 +1,6 @@
 ﻿using FluentResults;
 using Vermilion.Domain.Common;
+using Vermilion.Domain.DomainEvents;
 using Vermilion.Domain.Interfaces;
 using Vermilion.Domain.ValueObjects.Identifiers;
 
@@ -30,7 +31,7 @@ namespace Vermilion.Domain.Entities
 
         private Review() { }
 
-        public static Result<Review> Create(CateringId restaurantId, UserId userId, string userName, string comment, int rating)
+        public static Result<Review> Create(CateringId cateringId, UserId userId, string userName, string comment, int rating)
         {
             if (string.IsNullOrWhiteSpace(comment))
                 return Result.Fail("Comment can't be null");
@@ -39,19 +40,21 @@ namespace Vermilion.Domain.Entities
                 return Result.Fail($"Rating value must be between {MIN_RATING_VALUE} and {MAX_RATING_VALUE}");
 
             var id = new ReviewId(Guid.NewGuid());
-            var review = new Review(id, restaurantId, userId, userName, comment, rating);
+            var review = new Review(id, cateringId, userId, userName, comment, rating);
+
+            review.Raise(new ReviewCreatedDomainEvent(Guid.NewGuid(), review.Id, cateringId, userName, rating));
 
             return Result.Ok(review);
         }
 
         public void UpdateComment(string newComment)
         {
-            //i'll make it later
+            Comment = newComment;
         }
 
         public void UpdateRating(int rating)
         {
-            //i'll make it later
+            Rating = rating;
         }
     }
 }

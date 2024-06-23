@@ -7,7 +7,10 @@ using Vermilion.Application.Common.CachingExtensions;
 using Vermilion.Application.Common.Exceptions;
 using Vermilion.Contracts.Caterings.Queries.GetAll;
 using Vermilion.Contracts.Caterings.Queries.GetCateringDetails;
+using Vermilion.Contracts.Caterings.Queries.GetCateringsByCuisine;
+using Vermilion.Contracts.Caterings.Queries.GetCateringsByFeature;
 using Vermilion.Contracts.Caterings.Queries.GetPageCaterings;
+using Vermilion.Contracts.Caterings.Queries.GetPendingCaterings;
 using Vermilion.Contracts.Responses.Caterings;
 using Vermilion.Domain.Entities;
 using Vermilion.Domain.Repositories;
@@ -18,7 +21,10 @@ namespace Vermilion.Application.Handlers.Caterings
     public class CateringQueryHandler :
         IRequestHandler<GetCateringDetailsQuery, Result<ResponseCateringInfo>>,
         IRequestHandler<GetAllCateringQuery, Result<IEnumerable<ResponseCatering>>>,
-        IRequestHandler<GetPageCateringsQuery, Result<IEnumerable<ResponseCatering>>>
+        IRequestHandler<GetPageCateringsQuery, Result<IEnumerable<ResponseCatering>>>,
+        IRequestHandler<GetPendingCateringsQuery, Result<IEnumerable<ResponseCatering>>>,
+        IRequestHandler<GetCateringsByFeatureQuery, Result<IEnumerable<ResponseCatering>>>,
+        IRequestHandler<GetCateringsByCuisineQuery, Result<IEnumerable<ResponseCatering>>>
     {
         private readonly IRepositoryReadOnly<Catering> _cateringRepository;
         private readonly IRepositoryReadOnly<Review> _reviewRepository;
@@ -36,7 +42,7 @@ namespace Vermilion.Application.Handlers.Caterings
 
         public async Task<Result<ResponseCateringInfo>> Handle(GetCateringDetailsQuery request, CancellationToken cancellationToken)
         {
-            var existCatering = await _cache.GetAsync($"catering-{request.Id}", async token =>
+            var existCatering = await _cache.GetAsync($"caterings-{request.Id}", async token =>
             {
                 var existCatering = await _cateringRepository.GetBySpecAsync(new CateringByIdSpec(request.Id), cancellationToken);
                 return existCatering;
@@ -66,6 +72,27 @@ namespace Vermilion.Application.Handlers.Caterings
             var spec = GetPageSpec(request.pageNumber);
             var cateringsPage = await _cateringRepository.ListAsync(spec, cancellationToken);
             return Result.Ok(cateringsPage.Select(catering => _mapper.Map<ResponseCatering>(catering)));
+        }
+
+        public async Task<Result<IEnumerable<ResponseCatering>>> Handle(GetPendingCateringsQuery request, CancellationToken cancellationToken)
+        {
+            var spec = new PendingCateringSpec();
+            var pendingCaterings = await _cateringRepository.ListAsync(spec, cancellationToken);
+            return Result.Ok(pendingCaterings.Select(catering => _mapper.Map<ResponseCatering>(catering)));
+        }
+
+        public async Task<Result<IEnumerable<ResponseCatering>>> Handle(GetCateringsByFeatureQuery request, CancellationToken cancellationToken)
+        {
+            var spec = new CateringByFeatureSpec(request.featureName);
+            var cateringsByFeature = await _cateringRepository.ListAsync(spec, cancellationToken);
+            return Result.Ok(cateringsByFeature.Select(catering => _mapper.Map<ResponseCatering>(catering)));
+        }
+
+        public async Task<Result<IEnumerable<ResponseCatering>>> Handle(GetCateringsByCuisineQuery request, CancellationToken cancellationToken)
+        {
+            var spec = new CateringByCuisineSpec(request.cuisineName);
+            var cateringsByCuisine = await _cateringRepository.ListAsync(spec, cancellationToken);
+            return Result.Ok(cateringsByCuisine.Select(catering => _mapper.Map<ResponseCatering>(catering)));
         }
     }
 }

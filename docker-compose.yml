@@ -36,10 +36,42 @@ services:
      container_name: vermilion-cache
      restart: always
      ports:
-        - 6379:6379
+      - 6379:6379
      networks:
       - backend
+  
+  vermilion-mq:
+     image: rabbitmq:3.13.2-management
+     container_name: vermilion-mq
+     hostname: vermilion-queue
+     volumes:
+        - ./.containers/queue/data/:/var/lib/rabbitmq/mnesia
+        - ./.containers/queue/log/:/var/log/rabbitmq   
+     ports:
+      - "5672:5672"
+      - "15672:15672"
+     restart: always
+     environment:
+      RABBITMQ_DEFAULT_USER: guest
+      RABBITMQ_DEFAULT_PASS: guest
+     networks:
+      - backend
+   
+  vermilion-minio:
+    image: minio/minio:latest
+    environment:
+      MINIO_ROOT_USER: "minio"
+      MINIO_ROOT_PASSWORD: "minioroot"
+    ports:
+        - 9001:9001
+        - 9000:9000
+    volumes:
+    - minio-data:/data
+    command: server --console-address ":9001" /data
+    networks:
+    - backend
 
 volumes:
   postgres-data: {}
+  minio-data: {}
  

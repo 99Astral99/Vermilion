@@ -6,8 +6,6 @@ namespace Vermilion.Infrastructure
     {
         public static void Initialize(VermilionDbContext context)
         {
-            //context.Database.EnsureDeleted();
-            //context.Database.EnsureCreated();
             context.Database.Migrate();
         }
     }

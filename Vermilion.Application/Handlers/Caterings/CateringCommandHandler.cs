@@ -1,12 +1,13 @@
 ﻿using AutoMapper;
 using FluentResults;
 using MediatR;
+using Microsoft.Extensions.Caching.Distributed;
 using Vermilion.Application.Common.Exceptions;
 using Vermilion.Contracts.Caterings.Commands.AddCuisine;
 using Vermilion.Contracts.Caterings.Commands.AddFeature;
 using Vermilion.Contracts.Caterings.Commands.CreateCatering;
 using Vermilion.Contracts.Caterings.Commands.DeleteCatering;
-using Vermilion.Contracts.Caterings.Commands.UpdateCateringCommand;
+using Vermilion.Contracts.Caterings.Commands.UpdateCatering;
 using Vermilion.Contracts.Responses.Caterings;
 using Vermilion.Domain.Entities;
 using Vermilion.Domain.Repositories;
@@ -23,15 +24,17 @@ namespace Vermilion.Application.Handlers.Caterings
         private readonly IRepository<Catering> _cateringRepository;
         private readonly IRepository<Cuisine> _cuisineRepository;
         private readonly IRepository<Feature> _featureRepository;
+        private readonly IDistributedCache _cache;
 
         private readonly IMapper _mapper;
 
-        public CateringCommandHandler(IRepository<Catering> categoryRepository, IMapper mapper, IRepository<Cuisine> cuisineRepository, IRepository<Feature> featureRepository)
+        public CateringCommandHandler(IRepository<Catering> categoryRepository, IMapper mapper, IRepository<Cuisine> cuisineRepository, IRepository<Feature> featureRepository, IDistributedCache cache)
         {
             _cateringRepository = categoryRepository;
             _mapper = mapper;
             _cuisineRepository = cuisineRepository;
             _featureRepository = featureRepository;
+            _cache = cache;
         }
         public async Task<Result<ResponseCatering>> Handle(CreateCateringCommand request, CancellationToken cancellationToken)
         {
@@ -52,6 +55,7 @@ namespace Vermilion.Application.Handlers.Caterings
             await _cateringRepository.UpdateAsync(existCatering, cancellationToken);
 
             var updatedCatering = await _cateringRepository.GetByIdAsync(existCatering.Id, cancellationToken);
+            await _cache.RemoveAsync($"caterings-{request.Id}");
 
             return Result.Ok(_mapper.Map<ResponseCatering>(updatedCatering));
         }
@@ -63,6 +67,8 @@ namespace Vermilion.Application.Handlers.Caterings
                 return Result.Fail(new ExceptionalError($"\"{nameof(Catering)}\" with ID: {request.Id.Value} was not found", new NotFoundException()));
 
             await _cateringRepository.DeleteAsync(existCatering, cancellationToken);
+
+            await _cache.RemoveAsync($"caterings-{request.Id}");
 
             return Result.Ok();
         }
@@ -76,6 +82,8 @@ namespace Vermilion.Application.Handlers.Caterings
 
             catering.AddCuisine(cuisine);
             await _cateringRepository.UpdateAsync(catering);
+
+            await _cache.RemoveAsync($"caterings-{catering.Id}");
             return Result.Ok();
         }
 
@@ -87,6 +95,8 @@ namespace Vermilion.Application.Handlers.Caterings
             if (feature is null) return Result.Fail(new ExceptionalError($"\"{nameof(Feature)}\" with ID: {request.FeatureId.Value} was not found", new NotFoundException()));
             catering.AddFeature(feature);
             await _featureRepository.UpdateAsync(feature);
+
+            await _cache.RemoveAsync($"caterings-{catering.Id}");
             return Result.Ok();
         }
     }

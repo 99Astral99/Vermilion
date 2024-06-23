@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Vermilion.Domain.Entities;
+using Vermilion.Domain.Enums;
 using Vermilion.Domain.ValueObjects.Identifiers;
 
 namespace Vermilion.Infrastructure.Configurations
@@ -17,6 +18,19 @@ namespace Vermilion.Infrastructure.Configurations
 
             builder.HasIndex(e => e.Email).IsUnique();
             builder.Property(p => p.Email).IsRequired();
+
+            builder.ComplexProperty(x => x.FullName, x =>
+            {
+                x.Property(x => x.FirstName).HasColumnName("FirstName");
+                x.Property(x => x.LastName).HasColumnName("LastName");
+                x.Property(x => x.MiddleName).HasColumnName("MiddleName");
+            });
+
+            builder.Property(u => u.Role)
+                .HasConversion(
+                        role => role.ToString(),
+                        role => (UserRole)Enum.Parse(typeof(UserRole), role)
+                    );
 
             builder.HasMany(r => r.Reviews)
                 .WithOne()
