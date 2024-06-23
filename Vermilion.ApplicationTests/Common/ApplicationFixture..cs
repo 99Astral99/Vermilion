@@ -19,6 +19,7 @@ namespace Vermilion.ApplicationTests.Common
                 opt => opt.UseInMemoryDatabase("TestDb"));
             serviceCollection.AddScoped<IVermilionDbContext>(provider =>
                 provider.GetService<VermilionDbContext>()!);
+            serviceCollection.AddDistributedMemoryCache();
 
             serviceCollection.AddApplication();
 
