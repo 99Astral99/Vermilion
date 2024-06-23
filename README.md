@@ -31,13 +31,13 @@
 - Based on permissions (i'll update this section later)
 
 ## User
-- Create (mvp) ❌
-- Get (mvp)❌
-- Update ❌
-- Delete ❌
-- Add Review ❌
-- Create Restaurant❌
-- Upload Restaurant image ❌
+- Create (mvp) ✔️
+- Get (mvp)✔️
+- Update ✔️
+- Delete ✔️
+- Add Review ✔️
+- Create Restaurant✔️
+- Upload Restaurant image ✔️
 
 ## Catering
 - Create (mvp) ✔️
@@ -47,27 +47,27 @@
 - Restaurant pagination ✔️
 
 ## Menu
-- Create (mvp) ❌
-- Get (mvp)❌
-- Update ❌
-- Delete ❌
+- Create (mvp) ✔️
+- Get (mvp)✔️
+- Update ✔️
+- Delete ✔️
 
 ## Catering Cuisine 
 - Create (mvp) ✔️
 - Get (mvp)❌
 - Update ❌
 - Delete ❌
-- Filter by cuisines ❌
+- Filter by cuisines ✔️
 
 ## Catering Feature
 - Create (mvp) ✔️
 - Get (mvp)❌
 - Update ❌
 - Delete ❌
-- Filter by features ❌
+- Filter by features ✔️
 
 ## Catering opening hours (Work Schedule)
-- Create (mvp) ❌
+- Create (mvp) ✔️
 - Get (mvp)❌
 - Update ❌
 - Delete ❌
